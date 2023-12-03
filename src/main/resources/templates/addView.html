@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Character Creation</title>
+</head>
+<body>
+<h1>Character Creation</h1>
+<form id="characterForm">
+  <label for="name">Name:</label><br>
+  <input type="text" id="name" name="name"><br>
+  <label for="line">Line:</label><br>
+  <input type="text" id="line" name="line"><br>
+  <label for="adAp">AD/AP:</label><br>
+  <input type="checkbox" id="adAp" name="adAp"><br>
+  <label for="image">Image:</label><br>
+  <input type="text" id="image" name="image"><br>
+  <label for="health">Health:</label><br>
+  <input type="number" id="health" name="health"><br>
+  <label for="attack">Attack:</label><br>
+  <input type="number" id="attack" name="attack"><br>
+  <label for="speed">Speed:</label><br>
+  <input type="number" id="speed" name="speed"><br>
+  <label for="rune">Rune:</label><br>
+  <input type="text" id="rune" name="rune"><br>
+  <input type="submit" value="Submit">
+</form>
+
+<script>
+  document.getElementById('characterForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var form = e.target;
+    var formData = new FormData(form);
+
+    fetch('/create', {
+      method: 'POST',
+      body: formData
+    })
+            .then(function(response) {
+              if (response.ok) {
+                alert("Character created successfully");
+              } else {
+                throw new Error('Error: ' + response.statusText);
+              }
+            })
+            .catch(function(error) {
+              alert("Error creating character: " + error);
+            });
+  });
+</script>
+</body>
+</html>
