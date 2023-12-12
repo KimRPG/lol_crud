@@ -49,6 +49,10 @@ public class LoLService {
         }
         return ResponseEntity.ok().build();
     }
+    public ResponseEntity delete(String name){
+        loLRepository.deleteById(name);
+        return ResponseEntity.ok().build();
+    }
 
 
 
